@@ -46,8 +46,11 @@ head (pipae1)
 #grou= unique(pi_d7$D_M)
 
 
-head (pipae7)
-get_mean_by_day(pipae7 ,variavel ="co2",day =6 ,month = 11, year =2024)
+head (pipae3)
+get_mean_by_day(pipae3
+                ,variavel ="co2",
+                day =c(14,15) ,
+                month = 5, year =2024)
 
 
 

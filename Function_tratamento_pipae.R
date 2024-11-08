@@ -139,9 +139,9 @@ import_pipae <-  function(pipae, concate=FALSE){
 
 
 
-get_mean_by_day = function (x =pipae7, 
+get_mean_by_day = function (x =pipae3, 
                             variavel = "co2",
-                            day =14, month= 5, 
+                            day =15, month= 5, 
                             year =2024) {
   
   
