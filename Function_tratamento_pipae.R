@@ -59,17 +59,17 @@ import_pipae <-  function(pipae, concate=FALSE){
   
   pipae_all = data.frame()
   source <- c ("pipae7"="https://docs.google.com/spreadsheets/d/e/2PACX-1vTdOc4PMg1xC0qpUceE6BZV8L1oLn8D5zf-dALqqWiEQZBFJH23dzPiqwn7NOlFowHEis1N4eb7JvFZ/pub?output=csv"
-               ,"pipae3"="https://docs.google.com/spreadsheets/d/e/2PACX-1vSgEviRT5URoJqohwPc4m-HuNkwkqy9TVDOVnDsu7x0hyNYJvLPlc_B9y3TrEqNf1fhe6fPensFXlOH/pub?output=csv"
-               ,"pipae1" = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSTrF8idhrlX-M6jCkVvtV98Lnhxxa7pB2sYsHj7aNCjyiFaK8Dcq8RUbdn367v2PLNgQprJUA6mzWX/pub?output=csv"
-               ,"pipae2" = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRoDiLZmce1nVjxeILDPhhOpy4JdHiDfHUZDVACsjaGxxjv-2WSiEMR9XtG5LebX1MrSILGrAFwLd01/pub?output=csv"
+               ,"pipae8"="https://docs.google.com/spreadsheets/d/e/2PACX-1vRezDFvNifmWuJUoVIIhyazBaD281lsr4qeV3EWROGEUH8CDBD01riMOWMfDbsPH0Z8wFkEmtQRbfEC/pub?output=csv"
+               ,"pipae1" = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQmbdkhDjts41TXdkpoghubvLQ_5waEms3_RSUXBa_JBg1Z0o2AEnjRpWlTe6lv8go3nouimqUEeklI/pub?output=csv"
+               ,"pipae2" = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQZb9G0b6kE_I91HK7KOtIA7XJ_-OpW6I4J4ibTU4v1ljzAlgplWdzLRpsMiLqr6reiV6Jol3yrvOkE/pub?output=csv"
   )
   
   #sensores <- paste("pipae",seq(1, length(source)), sep="")
-  sensores <- paste("pipae", c(7,3,1,2), sep="")
+  sensores <- paste("pipae", c(7,8,3,1,2), sep="")
   if (is.null(pipae)==TRUE) {stop ("inclua sensores")}
   
   if (length(setdiff(pipae,sensores))!= 0) {
-    stop("há sensores no com essa tag ou há erros na tag",
+    stop("não há sensores com essa tag ou há erros na tag",
          call. = FALSE)
   }
   
@@ -130,8 +130,11 @@ import_pipae <-  function(pipae, concate=FALSE){
            M= month(site$Date),
            Y= year(site$Date),
            m=minute(site$Time))
+  site$DateTime <- as.POSIXct(
+    paste(site$Date, site$Time),
+    format = "%Y-%m-%d %HH %MM %SS")
   
-  return(site)
+ return(site)
   
 }
 
@@ -139,10 +142,10 @@ import_pipae <-  function(pipae, concate=FALSE){
 
 
 
-get_mean_by_day = function (x =pipae3, 
+get_mean_by_day = function (x, 
                             variavel = "co2",
-                            day =15, month= 5, 
-                            year =2024) {
+                            day =NULL, month= NULL, 
+                            year =NULL) {
   
   
   days_p=sort (unique (day(x$Date)))
@@ -219,6 +222,37 @@ get_mean_by_day = function (x =pipae3,
 
 
  
+
+
+separate_variable <- function(x, variable = "co2", na.rm = FALSE) {
+  # Definindo um vetor nomeado que mapeia variáveis às suas colunas
+  column_map <- list(
+    co2 = c("CO2.Concentration", "Date", "DateTime", "Time", "D", "M", "Y", "m"),
+    temperatura = c("Temperature", "Date", "DateTime", "Time", "D", "M", "Y", "m"),
+    umidade = c("Humidity", "Date", "DateTime", "Time", "D", "M", "Y", "m"),
+    luminosidade = c("Luminosity", "Date", "DateTime", "Time", "D", "M", "Y", "m")
+  )
+  
+  # Verifica se a variável está no mapa, caso contrário, retorna NULL
+  selected_columns <- column_map[[variable]]
+  
+  if (is.null(selected_columns)) {
+    stop("Variable not recognized.
+         Please choose from 'co2', 
+         'temperatura', 'umidade', or
+         'luminosidade'.")
+  }
+  
+  # Subconjunto dos dados com as colunas selecionadas
+  x <- x[, selected_columns, drop = FALSE]
+  
+  # Remover valores NA, se solicitado
+  if (na.rm) { x <- na.omit(x) }
+  
+  x
+}
+
+
 
 
 

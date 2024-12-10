@@ -2,6 +2,7 @@
 
 source("Loadpackges.R")
 source("Function_tratamento_pipae.R")
+library (ggplot2)
 #roda função t_dpi função testa range e média das variáveis inseridas
 
 ########################################################
@@ -24,18 +25,148 @@ iq<-na.omit(iq)
 #######Analise Exploratória####### 
 
 ############ pipae7 Tidy  ##########
-pipae7 <-  import_pipae ("pipae7")
-head (pipae7)
-pipae3 <-  import_pipae ("pipae3")
-head (pipae3)
+pipae7 <-import_pipae ("pipae7")
+tail (pipae7)
+pipae8 <-  import_pipae ("pipae8")
+tail (pipae8)
 pipae2 <-  import_pipae ("pipae2")
-head (pipae2)
+tail (pipae2)
 pipae1 <-  import_pipae ("pipae1")
-head (pipae1)
+tail (pipae1)
 
 ##
 
 
+
+
+pipae7 = separate_variable(pipae7, 
+                                  var= "co2",
+                                  na.rm = TRUE)
+pipae8 = separate_variable(pipae8, 
+                              var= "co2",
+                              na.rm = TRUE)
+
+pipae8_dia26 <- pipae8[
+  pipae8$D==26,]
+names(pipae8_dia26)[1] <- "CO2"
+#pipae8_dia26$CO2 <- c(pipae8_dia26$CO2 +200)
+pipae7_dia26 <- pipae7[
+  pipae7$D==26,]
+names(pipae7_dia26)[1] <- "CO2"
+par(mfrow = c(2,2), bty ="n", bg = "grey99" )
+
+
+pipae8_dia27 <- pipae8[
+  pipae8$D==27,]
+names(pipae8_dia27)[1] <- "CO2"
+#pipae8_dia27$CO2 <- c(pipae8_dia27$CO2 +200)
+pipae7_dia27 <- pipae7[
+  pipae7$D==27,]
+names(pipae7_dia27)[1] <- "CO2"
+
+
+par(mfrow = c(2,2), bty ="n", bg = "grey99" )
+
+plot (CO2 ~ DateTime, 
+      data=pipae7_dia26, type = "p", 
+      xlab="Hour", 
+      ylab = "CO\u2082", xaxt="n",
+      main= "pipae7 dia 26\nburacos obstruídos",
+      ylim = c(350,450))
+
+axis.POSIXct(1, 
+             at =seq(min(pipae7_dia26$DateTime), 
+                     max(pipae7_dia26$DateTime), 
+                     by = "hour"), 
+             format = "%H", 
+             las = 1)
+
+
+plot (CO2 ~ DateTime, 
+      data=pipae7_dia27, type = "p", 
+      xlab="Hour", 
+      ylab = "CO\u2082", xaxt="n",
+      main="Pipae7 dia 27\nburacos obstruídos",
+      ylim = c(320,420))
+
+axis.POSIXct(1, 
+             at =seq(min(pipae7_dia27$DateTime), 
+                     max(pipae7_dia27$DateTime), 
+                     by = "hour"), 
+             format = "%H", 
+             las = 1)
+
+
+plot (CO2 ~ DateTime, 
+      data=pipae8_dia26, type = "p", 
+      xlab="Hour", 
+      ylab = "CO\u2082", xaxt="n",
+      main="pipae8 dia 26\nburacos desobstruídos",
+      ylim = c(100,160))
+
+
+axis.POSIXct(1, 
+             at =seq(min(pipae8_dia26$DateTime), 
+                     max(pipae8_dia26$DateTime), 
+                     by = "hour"), 
+             format = "%H", 
+             las = 1)
+
+plot (CO2 ~ DateTime, 
+      data=pipae8_dia27, type = "p", 
+      xlab="Hour", 
+      ylab = "CO\u2082", xaxt="n",
+      main="pipae8 dia 27\nburacos desobstruídos",
+      ylim = c(100,200))
+
+
+axis.POSIXct(1, 
+             at =seq(min(pipae8_dia27$DateTime), 
+                     max(pipae8_dia27$DateTime), 
+                     by = "hour"), 
+             format = "%H", 
+             las = 1)
+
+
+piape7_26_27 <- rbind(pipae7_dia26,pipae7_dia27)
+piape8_26_27 <- rbind(pipae8_dia26, pipae8_dia27)
+
+length (piape7_26_27$CO2)
+piape7_26_27 <- piape7_26_27 [!duplicated(piape7_26_27$DateTime),]
+length(piape8_26_27$CO2)
+piape8_26_27 <- piape8_26_27 [!duplicated(piape8_26_27$DateTime),]
+
+piape7_26_27 <- piape7_26_27 [-length(piape7_26_27$CO2),]
+
+par (mfrow=c(1,2))
+boxplot(piape7_26_27$CO2)
+boxplot(piape8_26_27$CO2)
+
+sd (piape7_26_27$CO2)
+sd (piape8_26_27$CO2)
+
+anova (piape7_26_27$CO2
+       , piape8_26_27$CO2)
+
+# Gráfico de Bland-Altman
+dev.off()
+a=bland.altman.plot(piape7_26_27$CO2, piape8_26_27$CO2, 
+                  main = "Gráfico de Bland-Altman", 
+                  graph.sys = "base", silent =FALSE )
+
+
+concordância_Pipae7_e_8 <-  data.frame(data=seq(1:46))
+concordância_Pipae7_e_8$mean<- a$means
+concordância_Pipae7_e_8$diff<- a$diffs
+concordância_Pipae7_e_8$pipae7<- a$groups[1]
+concordância_Pipae7_e_8$pipae8<- a$groups[2]
+
+
+head (concordância_Pipae7_e_8)
+
+
+# Calcular o CCC
+CCC(piape7_26_27$CO2, piape8_26_27$CO2)$rho.c
 
 
 ############################################
@@ -46,11 +177,11 @@ head (pipae1)
 #grou= unique(pi_d7$D_M)
 
 
-head (pipae3)
-get_mean_by_day(pipae3
+head (pipae2)
+get_mean_by_day(pipae7
                 ,variavel ="co2",
-                day =c(14,15) ,
-                month = 5, year =2024)
+                day =26 ,
+                month = 11, year =2024)
 
 
 
@@ -375,4 +506,3 @@ med_ph = pi_d |>
 med_ph
 
 plot (medco2~medtem ,data=med_ph)
-
