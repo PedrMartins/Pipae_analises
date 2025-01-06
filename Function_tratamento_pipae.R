@@ -1,6 +1,6 @@
-########################################################
 ############Função testar planilhas#####################
-################
+
+
 t_dpi <- function(co2 = NULL, tem = NULL, umi = NULL, pre = NULL, na.rm = FALSE, ...) {
   
   data_list <- list(co2 = co2, tem = tem, umi = umi, pre = pre)
@@ -26,15 +26,6 @@ t_dpi <- function(co2 = NULL, tem = NULL, umi = NULL, pre = NULL, na.rm = FALSE,
   
   return(output)
 }
-
-#t_dpi (pi_d2$CO2)
-
-#h
-
-#t_dpi (co2=x.Na, tem = x, na.rm = TRUE)
-
-#class (x)
-#match.arg () match.arg matches a character arg against a table of candidate values as specified by choices
 
 
 
@@ -252,7 +243,25 @@ separate_variable <- function(x, variable = "co2", na.rm = FALSE) {
   x
 }
 
-
+get_data_by_month <- function(x, month=NULL, days= NULL){
+  if (is.null(month)) {
+    stop("choise a month")
+  }
+  if (is.null(days)) {
+    x <- x[x$M==month,]
+    return(x)
+  }else {
+    x <- x[x$M==month,]
+    pipae_month <- data.frame()
+    for (i in days) {
+      pipae_dia <- x[x$D==i,]
+      pipae_month <- rbind(pipae_dia, pipae_month)
+      }
+    return(pipae_month)
+  }
+  
+  
+}
 
 
 

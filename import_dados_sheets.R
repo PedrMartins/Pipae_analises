@@ -2,7 +2,7 @@
 
 source("Loadpackges.R")
 source("Function_tratamento_pipae.R")
-library (ggplot2)
+
 #roda função t_dpi função testa range e média das variáveis inseridas
 
 ########################################################
@@ -35,10 +35,6 @@ pipae1 <-  import_pipae ("pipae1")
 tail (pipae1)
 
 ##
-
-
-
-
 pipae7 = separate_variable(pipae7, 
                                   var= "co2",
                                   na.rm = TRUE)
@@ -46,23 +42,11 @@ pipae8 = separate_variable(pipae8,
                               var= "co2",
                               na.rm = TRUE)
 
-pipae8_dia26 <- pipae8[
-  pipae8$D==26,]
-names(pipae8_dia26)[1] <- "CO2"
+
+
 #pipae8_dia26$CO2 <- c(pipae8_dia26$CO2 +200)
-pipae7_dia26 <- pipae7[
-  pipae7$D==26,]
-names(pipae7_dia26)[1] <- "CO2"
-par(mfrow = c(2,2), bty ="n", bg = "grey99" )
+pipae7_selected_days <- get_data_by_month(pipae7, month=12, days= c(20,23,24))
 
-
-pipae8_dia27 <- pipae8[
-  pipae8$D==27,]
-names(pipae8_dia27)[1] <- "CO2"
-#pipae8_dia27$CO2 <- c(pipae8_dia27$CO2 +200)
-pipae7_dia27 <- pipae7[
-  pipae7$D==27,]
-names(pipae7_dia27)[1] <- "CO2"
 
 
 par(mfrow = c(2,2), bty ="n", bg = "grey99" )

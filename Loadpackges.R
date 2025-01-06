@@ -4,7 +4,8 @@
 pkg <- c('googlesheets4',"lubridate", 
          "timetk","dplyr","corrplot",
          "tidyr",'stringr',"viridis",
-         "BlandAltmanLeh","DescTools")
+         "BlandAltmanLeh","DescTools", 
+         "ggplot2")
 
 pkg <- pkg[!pkg%in%installed.packages()] 
 install.packages (pkg)
@@ -20,5 +21,6 @@ library(tibble)
 library(viridis)
 library(BlandAltmanLeh)
 library(DescTools)
+library (ggplot2)
 
 
