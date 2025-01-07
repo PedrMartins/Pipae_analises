@@ -45,7 +45,7 @@ rm_sp_if_n <- function(x) {
 
 }
 
-
+pipae = "pipae2"
 import_pipae <-  function(pipae, concate=FALSE){
   
   pipae_all = data.frame()
@@ -56,7 +56,7 @@ import_pipae <-  function(pipae, concate=FALSE){
   )
   
   #sensores <- paste("pipae",seq(1, length(source)), sep="")
-  sensores <- paste("pipae", c(7,8,3,1,2), sep="")
+  sensores <- paste("pipae", c(7,8,1,2), sep="")
   if (is.null(pipae)==TRUE) {stop ("inclua sensores")}
   
   if (length(setdiff(pipae,sensores))!= 0) {

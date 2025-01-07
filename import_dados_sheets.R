@@ -29,10 +29,7 @@ tail (pipae1)
 ##
 pipae7 = separate_variable(pipae7, 
                                   var= "co2",
-                                  na.rm = TRUE)
-pipae8 = separate_variable(pipae8, 
-                              var= "co2",
-                              na.rm = TRUE)
+                                  na.rm = TRUE)# as example
 
 
 
@@ -43,12 +40,18 @@ pipae7_days_20_31 <- get_data_by_month(pipae7,
 pipae1_days_20_31 <- get_data_by_month(pipae1,
                                           month=12, 
                                           days= c(20:31))
+pipae2_days_20_31 <- get_data_by_month(pipae2,
+                                       month=12, 
+                                       days= c(20:31))
 
 
 write.table(pipae7_days_20_31, "pipae7_december_20_31.csv",
           sep = "\t", row.names = FALSE, dec= ",")
 
 write.table(pipae1_days_20_31, "pipae1_december_20_31.csv",
+            sep = "\t", row.names = FALSE, dec= ",")
+
+write.table(pipae2_days_20_31, "pipae2_december_20_31.csv",
             sep = "\t", row.names = FALSE, dec= ",")
 
 
