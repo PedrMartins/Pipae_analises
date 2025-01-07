@@ -3,14 +3,6 @@
 source("Loadpackges.R")
 source("Function_tratamento_pipae.R")
 
-#roda função t_dpi função testa range e média das variáveis inseridas
-
-########################################################
-############Read google sheets data into R##############
-
-# Importar dados
-#dados_csv <- read.csv(csv_url)
-
 # Visualizar dados
 ########################################################
 #####################Tratando dados####################
@@ -45,8 +37,19 @@ pipae8 = separate_variable(pipae8,
 
 
 #pipae8_dia26$CO2 <- c(pipae8_dia26$CO2 +200)
-pipae7_selected_days <- get_data_by_month(pipae7, month=12, days= c(20,23,24))
+pipae7_days_20_31 <- get_data_by_month(pipae7,
+                                          month=12, 
+                                          days= c(20:31))
+pipae1_days_20_31 <- get_data_by_month(pipae1,
+                                          month=12, 
+                                          days= c(20:31))
 
+
+write.table(pipae7_days_20_31, "pipae7_december_20_31.csv",
+          sep = "\t", row.names = FALSE, dec= ",")
+
+write.table(pipae1_days_20_31, "pipae1_december_20_31.csv",
+            sep = "\t", row.names = FALSE, dec= ",")
 
 
 par(mfrow = c(2,2), bty ="n", bg = "grey99" )
