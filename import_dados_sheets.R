@@ -27,32 +27,27 @@ pipae1 <-  import_pipae ("pipae1")
 tail (pipae1)
 
 ##
-pipae7 = separate_variable(pipae7, 
+pipae2_co2 = separate_variable(pipae2, 
                                   var= "co2",
                                   na.rm = TRUE)# as example
 
-
+pipae2_temp = separate_variable(pipae2, 
+                           var= "temperatura",
+                           na.rm = TRUE)
+pipae2_umi = separate_variable(pipae2, 
+                           var= "umidade",
+                           na.rm = TRUE)
 
 #pipae8_dia26$CO2 <- c(pipae8_dia26$CO2 +200)
-pipae7_days_20_31 <- get_data_by_month(pipae7,
+pipae2_days_20_31 <- get_data_by_month(pipae2_umi,
                                           month=12, 
                                           days= c(20:31))
-pipae1_days_20_31 <- get_data_by_month(pipae1,
-                                          month=12, 
-                                          days= c(20:31))
-pipae2_days_20_31 <- get_data_by_month(pipae2,
-                                       month=12, 
-                                       days= c(20:31))
 
 
-write.table(pipae7_days_20_31, "pipae7_december_20_31.csv",
+write.table(pipae2_days_20_31, "pipae2_umi_december_20_31.csv",
           sep = "\t", row.names = FALSE, dec= ",")
 
-write.table(pipae1_days_20_31, "pipae1_december_20_31.csv",
-            sep = "\t", row.names = FALSE, dec= ",")
 
-write.table(pipae2_days_20_31, "pipae2_december_20_31.csv",
-            sep = "\t", row.names = FALSE, dec= ",")
 
 
 par(mfrow = c(2,2), bty ="n", bg = "grey99" )
