@@ -1,5 +1,5 @@
 # source("import_dados_sheets.R") Arrumar script primeiro
-
+x11()
 
 par(mfrow = c(1,1), bty ="n", bg = "grey99" )
 
@@ -16,15 +16,16 @@ axis.POSIXct(1,
              format = "%D", 
              las = 1)
 
-
 #lines(media_temperatura~nivel,
 #      data=pipae_mediatemperatura, lty = 5,
 #      lwd = 4, col = "darkorange")
 
 colnames(pipae7_days_20_31)
 
-lines(CO2 ~ DateTime, data=pipae7_days_20_31, lty=2)
-lines(CO2 ~ DateTime, data=pipae2_days_20_31, lty=2)
-lines(CO2 ~ DateTime, data=pipae1_days_20_31, lty=2)
+lines(CO2 ~ DateTime, data=pipae7_days_20_31, 
+      lty=2, lwd = 4)
+lines(CO2 ~ Date, data=pipae2_days_20_31, 
+      lty=2, lwd = 4)
+lines(CO2 ~ H, data=pipae1_days_20_31, lty=2)
 
 dev.off ()

@@ -45,7 +45,7 @@ rm_sp_if_n <- function(x) {
 
 }
 
-pipae = "pipae2"
+
 import_pipae <-  function(pipae, concate=FALSE){
   
   pipae_all = data.frame()
