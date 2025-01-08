@@ -24,28 +24,35 @@ pipae1 <-  import_pipae ("pipae1")
 ##
 
 pipae1_co2 = separate_variable(pipae1, 
-                                  var= "co2",
-                                  na.rm = TRUE)# as example
+                               var= "co2",
+                               na.rm = TRUE, 
+                               duplicated = TRUE)
 
 pipae2_co2 = separate_variable(pipae2, 
-                           var= "co2",
-                           na.rm = TRUE)
+                               var= "co2",
+                               na.rm = TRUE, 
+                               duplicated = TRUE)
+
 pipae7_co2 = separate_variable(pipae7, 
-                           var= "co2",
-                           na.rm = TRUE)
+                               var= "co2",
+                               na.rm = TRUE, 
+                               duplicated = TRUE)
 
 #pipae8_dia26$CO2 <- c(pipae8_dia26$CO2 +200)
 pipae1_days_20_31 <- get_data_by_month(pipae1_co2,
                                           month=12, 
-                                          days= c(20:31))
+                                          days= c(20:31), 
+                                          order = TRUE)
 
 pipae2_days_20_31 <- get_data_by_month(pipae2_co2,
                                        month=12, 
-                                       days= c(20:31))
+                                       days= c(20:31), 
+                                       order = TRUE)
 
 pipae7_days_20_31 <- get_data_by_month(pipae7_co2,
                                        month=12, 
-                                       days= c(20:31))
+                                       days= c(20:31), 
+                                       order = TRUE)
 
 
 #write.table(pipae1_days_20_31, "pipae1_december_20_31.csv",
@@ -57,25 +64,7 @@ colnames(pipae1_days_20_31)[1] <- "CO2"
 colnames(pipae2_days_20_31)[1] <- "CO2"
 colnames(pipae7_days_20_31)[1] <- "CO2"
 
-pipae1_days_20_31 <- pipae1_days_20_31 [!duplicated(
-                                      pipae1_days_20_31$DateTime),]
-pipae1_days_20_31 <-  pipae1_days_20_31[order(
-                                      pipae1_days_20_31$DateTime),]
 
-pipae2_days_20_31 <- pipae2_days_20_31 [!duplicated(
-                                      pipae2_days_20_31$DateTime),]
-pipae2_days_20_31 <-  pipae2_days_20_31[order(
-                                      pipae2_days_20_31$DateTime),]
-
-pipae7_days_20_31 <- pipae7_days_20_31 [!duplicated(
-                                      pipae7_days_20_31$DateTime),]
-pipae7_days_20_31 <-  pipae7_days_20_31[order(
-                                      pipae7_days_20_31$DateTime),]
-
-
-
-
-  
 plot (CO2 ~ DateTime, 
       data=pipae7_dia27, type = "p", 
       xlab="Hour", 

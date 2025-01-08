@@ -215,7 +215,8 @@ get_mean_by_day = function (x,
  
 
 
-separate_variable <- function(x, variable = "co2", na.rm = FALSE) {
+separate_variable <- function(x, variable = "co2", na.rm = FALSE, 
+                              order=FALSE, duplicated= FALSE) {
   # Definindo um vetor nomeado que mapeia variáveis às suas colunas
   column_map <- list(
     co2 = c("CO2.Concentration", "Date", "DateTime", "Time", "D", "M", "Y", "m"),
@@ -239,17 +240,19 @@ separate_variable <- function(x, variable = "co2", na.rm = FALSE) {
   
   # Remover valores NA, se solicitado
   if (na.rm) { x <- na.omit(x) }
-  
-  x
+  if (order){x <-  x[order(x$DateTime),]}
+  if (duplicated) {x <- x [!duplicated(x$DateTime),]}
+  return (x)
 }
 
 get_data_by_month <- function(x, month=NULL, 
-                              days= NULL){
+                              days= NULL, order=TRUE){
   if (is.null(month)) {
     stop("choise a month")
   }
   if (is.null(days)) {
     x <- x[x$M==month,]
+    if (order){x <-  x[order(x$DateTime),]}
     return(x)
   }else {
     x <- x[x$M==month,]
@@ -257,7 +260,9 @@ get_data_by_month <- function(x, month=NULL,
     for (i in days) {
       pipae_dia <- x[x$D==i,]
       pipae_month <- rbind(pipae_dia, pipae_month)
-      }
+    }
+    if (order){pipae_month <-  pipae_month[
+                                  order(pipae_month$DateTime),]}
     return(pipae_month)
   }
   
