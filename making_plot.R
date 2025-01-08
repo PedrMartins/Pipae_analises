@@ -7,7 +7,7 @@ plot (CO2 ~ DateTime,
       data=pipae7_days_20_31, type = "n", 
       xlab="Days", 
       ylab = "CO\u2082 ppm", xaxt="n", 
-      ylim= c(0, 600))
+      ylim= c(200, 500))
 
 axis.POSIXct(1, 
              at =seq(min(pipae7_days_20_31$DateTime), 
@@ -20,12 +20,14 @@ axis.POSIXct(1,
 #      data=pipae_mediatemperatura, lty = 5,
 #      lwd = 4, col = "darkorange")
 
-colnames(pipae7_days_20_31)
+
+
 
 lines(CO2 ~ DateTime, data=pipae7_days_20_31, 
-      lty=2, lwd = 4)
-lines(CO2 ~ Date, data=pipae2_days_20_31, 
-      lty=2, lwd = 4)
-lines(CO2 ~ H, data=pipae1_days_20_31, lty=2)
+      lty=2, lwd = 3, col = "red")
+lines(CO2 ~ DateTime, data=pipae2_days_20_31, 
+      lty=1, lwd = 3, col = "blue")
+lines(CO2 ~ DateTime, data=pipae1_days_20_31, 
+      lty=1, lwd=3, col = "purple")
 
 dev.off ()

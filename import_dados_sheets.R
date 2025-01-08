@@ -59,17 +59,23 @@ colnames(pipae7_days_20_31)[1] <- "CO2"
 
 pipae1_days_20_31 <- pipae1_days_20_31 [!duplicated(
                                       pipae1_days_20_31$DateTime),]
+pipae1_days_20_31 <-  pipae1_days_20_31[order(
+                                      pipae1_days_20_31$DateTime),]
 
 pipae2_days_20_31 <- pipae2_days_20_31 [!duplicated(
                                       pipae2_days_20_31$DateTime),]
+pipae2_days_20_31 <-  pipae2_days_20_31[order(
+                                      pipae2_days_20_31$DateTime),]
 
 pipae7_days_20_31 <- pipae7_days_20_31 [!duplicated(
+                                      pipae7_days_20_31$DateTime),]
+pipae7_days_20_31 <-  pipae7_days_20_31[order(
                                       pipae7_days_20_31$DateTime),]
 
 
 
 
-
+  
 plot (CO2 ~ DateTime, 
       data=pipae7_dia27, type = "p", 
       xlab="Hour", 
