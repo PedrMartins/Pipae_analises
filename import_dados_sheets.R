@@ -8,23 +8,17 @@ source("Function_tratamento_pipae.R")
 #####################Tratando dados####################
 
 
-#lidando com NA
-
-colSums(is.na(pi_d2))
-
-iq<-na.omit(iq)
-
 #######Analise Exploratória####### 
 
 ############ pipae7 Tidy  ##########
 pipae7 <-import_pipae ("pipae7")
-tail (pipae7)
-pipae8 <-  import_pipae ("pipae8")
-tail (pipae8)
+
+#pipae8 <-  import_pipae ("pipae8")
+
 pipae2 <-  import_pipae ("pipae2")
-tail (pipae2)
+
 pipae1 <-  import_pipae ("pipae1")
-tail (pipae1)
+
 
 
 ##
@@ -33,11 +27,11 @@ pipae1_co2 = separate_variable(pipae1,
                                   var= "co2",
                                   na.rm = TRUE)# as example
 
-pipae2_temp = separate_variable(pipae2, 
-                           var= "temperatura",
+pipae2_co2 = separate_variable(pipae2, 
+                           var= "co2",
                            na.rm = TRUE)
-pipae2_umi = separate_variable(pipae2, 
-                           var= "umidade",
+pipae7_co2 = separate_variable(pipae7, 
+                           var= "co2",
                            na.rm = TRUE)
 
 #pipae8_dia26$CO2 <- c(pipae8_dia26$CO2 +200)
@@ -45,47 +39,35 @@ pipae1_days_20_31 <- get_data_by_month(pipae1_co2,
                                           month=12, 
                                           days= c(20:31))
 
+pipae2_days_20_31 <- get_data_by_month(pipae2_co2,
+                                       month=12, 
+                                       days= c(20:31))
 
-write.table(pipae2_days_20_31, "pipae2_december_20_31.csv",
-          sep = "\t", row.names = FALSE, dec= ",")
+pipae7_days_20_31 <- get_data_by_month(pipae7_co2,
+                                       month=12, 
+                                       days= c(20:31))
+
+
+#write.table(pipae1_days_20_31, "pipae1_december_20_31.csv",
+#          sep = "\t", row.names = FALSE, dec= ",")
 
 
 
 colnames(pipae1_days_20_31)[1] <- "CO2"
+colnames(pipae2_days_20_31)[1] <- "CO2"
+colnames(pipae7_days_20_31)[1] <- "CO2"
+
 pipae1_days_20_31 <- pipae1_days_20_31 [!duplicated(
                                       pipae1_days_20_31$DateTime),]
-pipae2_days_20_31
-pipae7_days_20_31
+
+pipae7_days_20_31 <- pipae2_days_20_31 [!duplicated(
+                                      pipae2_days_20_31$DateTime),]
+
+pipae7_days_20_31 <- pipae7_days_20_31 [!duplicated(
+                                      pipae7_days_20_31$DateTime),]
 
 
-par(mfrow = c(1,1), bty ="n", bg = "grey99" )
 
-
-
-
-plot (CO2 ~ DateTime, 
-      data=pipae7_days_20_31, type = "n", 
-      xlab="Days", 
-      ylab = "CO\u2082", xaxt="n", 
-      ylim= c(0, 600))
-
-axis.POSIXct(1, 
-             at =seq(min(pipae7_days_20_31$DateTime), 
-                     max(pipae7_days_20_31$DateTime), 
-                     by = "day"), 
-             format = "%D", 
-             las = 1)
-
-
-#lines(media_temperatura~nivel,
-#      data=pipae_mediatemperatura, lty = 5,
-#      lwd = 4, col = "darkorange")
-
-lines(CO2 ~ DateTime, data=pipae7_days_20_31, lty=2)
-lines(CO2 ~ DateTime, data=pipae2_days_20_31, lty=2)
-lines(CO2 ~ DateTime, data=pipae1_days_20_31, lty=2)
-
-dev.off ()
 
 
 View (pipae7_days_20_31)
