@@ -1,6 +1,7 @@
 # source("import_dados_sheets.R") Arrumar script primeiro
 
-x11()
+jpeg(filename = "pipaes_co2.jpg",
+      width = 800, height = 600)
 par(mfrow = c(1,2), bty ="n", bg = "grey99" )
 
 plot (CO2 ~ DateTime, 
@@ -47,7 +48,8 @@ legend("topright", c("Pipae1","Pipae2","Pipae7")
 
 dev.off ()
 
-x11()
+jpeg(filename = "pipaes_temp.jpg",
+     width = 800, height = 600)
 par(mfrow = c(1,2), bty ="n", bg = "grey99" )
 
 plot (Temperature ~ DateTime, 
@@ -98,7 +100,8 @@ legend("topright", c("Pipae1","Pipae2","Pipae7")
 dev.off()
 
 
-x11()
+jpeg(filename = "pipaes_hum.jpg",
+     width = 800, height = 600)
 par(mfrow = c(1,2), bty ="n", bg = "grey99" )
 
 plot (Humidity ~ DateTime, 
