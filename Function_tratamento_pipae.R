@@ -219,10 +219,10 @@ separate_variable <- function(x, variable = "co2", na.rm = FALSE,
                               order=FALSE, duplicated= FALSE) {
   # Definindo um vetor nomeado que mapeia variáveis às suas colunas
   column_map <- list(
-    co2 = c("CO2.Concentration", "Date", "DateTime", "Time", "D", "M", "Y", "m"),
-    temperatura = c("Temperature", "Date", "DateTime", "Time", "D", "M", "Y", "m"),
-    umidade = c("Humidity", "Date", "DateTime", "Time", "D", "M", "Y", "m"),
-    luminosidade = c("Luminosity", "Date", "DateTime", "Time", "D", "M", "Y", "m")
+    co2 = c("CO2.Concentration", "Date", "DateTime", "Time","H","D", "M", "Y", "m"),
+    temperatura = c("Temperature", "Date", "DateTime", "Time", "H","D", "M", "Y", "m"),
+    umidade = c("Humidity", "Date", "DateTime", "Time", "H","D", "M", "Y", "m"),
+    luminosidade = c("Luminosity", "Date", "DateTime", "Time","H", "D", "M", "Y", "m")
   )
   
   # Verifica se a variável está no mapa, caso contrário, retorna NULL
