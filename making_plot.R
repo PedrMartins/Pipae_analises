@@ -1,34 +1,34 @@
 source("import_dados_sheets.R") 
 
 
-pipae7_days_20_31 <- pipae7_days_20_31 %>%
-  filter(DateTime < as.POSIXct("2025-01-09 00:00:00") | DateTime >= as.POSIXct("2025-01-09 15:00:00"))
-pipae2_days_20_31 <- pipae2_days_20_31 %>%
-  filter(DateTime < as.POSIXct("2025-01-09 00:00:00") | DateTime >= as.POSIXct("2025-01-09 15:00:00"))
-pipae1_days_20_31 <- pipae1_days_20_31 %>%
-  filter(DateTime < as.POSIXct("2025-01-09 00:00:00") | DateTime >= as.POSIXct("2025-01-09 15:00:00"))
+#pipae7_days_20_31 <- pipae7_days_20_31 %>%
+#  filter(DateTime < as.POSIXct("2025-01-09 00:00:00") | DateTime >= as.POSIXct("2025-01-09 15:00:00"))
+#pipae2_days_20_31 <- pipae2_days_20_31 %>%
+#  filter(DateTime < as.POSIXct("2025-01-09 00:00:00") | DateTime >= as.POSIXct("2025-01-09 15:00:00"))
+#pipae1_days_20_31 <- pipae1_days_20_31 %>%
+#  filter(DateTime < as.POSIXct("2025-01-09 00:00:00") | DateTime >= as.POSIXct("2025-01-09 15:00:00"))
 
-pipae7_days_20_31_temp <- pipae7_days_20_31_temp %>%
-  filter(DateTime < as.POSIXct("2025-01-09 00:00:00") | DateTime >= as.POSIXct("2025-01-09 15:00:00"))
+#pipae7_days_20_31_temp <- pipae7_days_20_31_temp %>%
+#  filter(DateTime < as.POSIXct("2025-01-09 00:00:00") | DateTime >= as.POSIXct("2025-01-09 15:00:00"))
 
-pipae2_days_20_31_temp <- pipae2_days_20_31_temp %>%
-  filter(DateTime < as.POSIXct("2025-01-09 00:00:00") | DateTime >= as.POSIXct("2025-01-09 15:00:00"))
+#pipae2_days_20_31_temp <- pipae2_days_20_31_temp %>%
+#  filter(DateTime < as.POSIXct("2025-01-09 00:00:00") | DateTime >= as.POSIXct("2025-01-09 15:00:00"))
 
-pipae1_days_20_31_temp <- pipae1_days_20_31_temp %>%
-  filter(DateTime < as.POSIXct("2025-01-09 00:00:00") | DateTime >= as.POSIXct("2025-01-09 15:00:00"))
+#pipae1_days_20_31_temp <- pipae1_days_20_31_temp %>%
+#  filter(DateTime < as.POSIXct("2025-01-09 00:00:00") | DateTime >= as.POSIXct("2025-01-09 15:00:00"))
 
-pipae7_days_20_31_hum <- pipae7_days_20_31_hum %>%
-  filter(DateTime < as.POSIXct("2025-01-09 00:00:00") | DateTime >= as.POSIXct("2025-01-09 15:00:00"))
+#pipae7_days_20_31_hum <- pipae7_days_20_31_hum %>%
+#  filter(DateTime < as.POSIXct("2025-01-09 00:00:00") | DateTime >= as.POSIXct("2025-01-09 15:00:00"))
 
-pipae2_days_20_31_hum <- pipae2_days_20_31_hum %>%
-  filter(DateTime < as.POSIXct("2025-01-09 00:00:00") | DateTime >= as.POSIXct("2025-01-09 15:00:00"))
+#pipae2_days_20_31_hum <- pipae2_days_20_31_hum %>%
+#  filter(DateTime < as.POSIXct("2025-01-09 00:00:00") | DateTime >= as.POSIXct("2025-01-09 15:00:00"))
 
-pipae1_days_20_31_hum <- pipae1_days_20_31_hum %>%
-  filter(DateTime < as.POSIXct("2025-01-09 00:00:00") | DateTime >= as.POSIXct("2025-01-09 15:00:00"))
+#pipae1_days_20_31_hum <- pipae1_days_20_31_hum %>%
+#  filter(DateTime < as.POSIXct("2025-01-09 00:00:00") | DateTime >= as.POSIXct("2025-01-09 15:00:00"))
 
 
 
-jpeg(filename = "pipaes_co2_9_13.jpg",
+jpeg(filename = "pipaes_co2_20_27.jpg",
       width = 800, height = 600)
 par(mfrow = c(1,2), bty ="n", bg = "grey99" )
 
@@ -74,7 +74,7 @@ legend("topright", c("Pipae1","Pipae2","Pipae7")
 
 dev.off ()
 
-jpeg(filename = "pipaes_temp_9_13.jpg",
+jpeg(filename = "pipaes_temp_20_27.jpg",
      width = 800, height = 600)
 par(mfrow = c(1,2), bty ="n", bg = "grey99" )
 
@@ -126,7 +126,7 @@ legend("topright", c("Pipae1","Pipae2","Pipae7")
 dev.off()
 
 
-jpeg(filename = "pipaes_hum_9_13.jpg",
+jpeg(filename = "pipaes_hum_20_27.jpg",
      width = 800, height = 600)
 par(mfrow = c(1,2), bty ="n", bg = "grey99" )
 
