@@ -37,17 +37,17 @@ pipae7_co2 = separate_variable(pipae7,
 #pipae8_dia26$CO2 <- c(pipae8_dia26$CO2 +200)
 pipae1_days_20_31 <- get_data_by_month(pipae1_co2,
                                           month=1, 
-                                          days= c(9:13), 
+                                          days= c(20:27), 
                                           order = TRUE)
 
 pipae2_days_20_31 <- get_data_by_month(pipae2_co2,
                                        month=1, 
-                                       days= c(9:13), 
+                                       days= c(20:27), 
                                        order = TRUE)
 
 pipae7_days_20_31 <- get_data_by_month(pipae7_co2,
                                        month=1, 
-                                       days= c(9:13), 
+                                       days= c(20:27), 
                                        order = TRUE)
 
 
@@ -100,17 +100,17 @@ pipae7_temp = separate_variable(pipae7,
 #pipae8_dia26$CO2 <- c(pipae8_dia26$CO2 +200)
 pipae1_days_20_31_temp <- get_data_by_month(pipae1_temp,
                                        month=1, 
-                                       days= c(9:13), 
+                                       days= c(20:27), 
                                        order = TRUE)
 
 pipae2_days_20_31_temp <- get_data_by_month(pipae2_temp,
                                        month=1, 
-                                       days= c(9:13), 
+                                       days= c(20:27), 
                                        order = TRUE)
 
 pipae7_days_20_31_temp <- get_data_by_month(pipae7_temp,
                                        month=1, 
-                                       days= c(9:13), 
+                                       days= c(20:27), 
                                        order = TRUE)
 
 mean_pipae7_temp = pipae7_days_20_31_temp |>
@@ -146,17 +146,17 @@ pipae7_hum = separate_variable(pipae7,
 #pipae8_dia26$CO2 <- c(pipae8_dia26$CO2 +200)
 pipae1_days_20_31_hum <- get_data_by_month(pipae1_hum,
                                             month=1, 
-                                            days= c(9:13), 
+                                            days= c(20:27), 
                                             order = TRUE)
 
 pipae2_days_20_31_hum <- get_data_by_month(pipae2_hum,
                                             month=1, 
-                                            days= c(9:13), 
+                                            days= c(20:27), 
                                             order = TRUE)
 
 pipae7_days_20_31_hum <- get_data_by_month(pipae7_hum,
                                             month=1, 
-                                            days= c(9:13), 
+                                            days= c(20:27), 
                                             order = TRUE)
 
 mean_pipae7_umi = pipae7_days_20_31_hum |>

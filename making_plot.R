@@ -35,7 +35,7 @@ par(mfrow = c(1,2), bty ="n", bg = "grey99" )
 plot (CO2 ~ DateTime, 
       data=pipae7_days_20_31, type = "n", 
       xlab="Days", 
-      ylab = "CO\u2082 ppm", xaxt="n", ylim=c(100,500))
+      ylab = "CO\u2082 ppm", xaxt="n", ylim=c(100,3500))
 
 axis.POSIXct(1, 
              at =seq(min(pipae7_days_20_31$DateTime), 
@@ -58,7 +58,7 @@ legend("topright", c("Pipae1","Pipae2","Pipae7")
 plot (mean_co2 ~ D, 
       data=mean_pipae1_co2, type = "n", 
       xlab="Days", 
-      ylab = "mean CO\u2082 ppm",ylim=c(100,500))
+      ylab = "mean CO\u2082 ppm",ylim=c(100,3000))
 
 lines(mean_co2 ~ D, data=mean_pipae7_co2, 
       lty=1, lwd = 2, col = "red")
