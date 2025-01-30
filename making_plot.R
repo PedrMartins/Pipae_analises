@@ -133,7 +133,8 @@ par(mfrow = c(1,2), bty ="n", bg = "grey99" )
 plot (Humidity ~ DateTime, 
       data=pipae7_days_20_31_hum, type = "n", 
       xlab="Days", 
-      ylab = "Moisture %", xaxt="n")
+      ylab = "Moisture %", xaxt="n",
+      ylim=c(0, 100))
 
 axis.POSIXct(1, 
              at =seq(min(pipae7_days_20_31_hum$DateTime), 
@@ -171,7 +172,5 @@ lines(mean_hum ~ D, data=mean_pipae1_umi,
 legend("bottomright", c("Pipae1","Pipae2","Pipae7")
        , lty= 1,
        col =c("purple", "blue", "red"), bty ="n")
-
-
 
 dev.off()
